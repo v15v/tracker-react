@@ -1,11 +1,10 @@
 import React from "react"
 
-// TODO: Написать функционал добавления привычки
 // FIXME: type any
-const AddHabit = ({onClick = (f: any) => f}) => (
+const AddHabit = ({onAdd = (f: any) => f}) => (
     <input id="addHabit" className="input has-text-right"
            type="text"
-           onClick={onClick}
+           onKeyDown={onAdd}
            placeholder="Добавить привычку" />
 )
 

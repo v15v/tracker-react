@@ -1,17 +1,22 @@
 [
   {
+    "id": "e8d9af10-8368-41e4-ab44-3b1ad91cbe81",
     "name": "Habit 1"
   },
   {
+    "id": "e8d9af10-8368-41e4-ab44-3b1ad91cbe82",
     "name": "Habit 2"
   },
   {
+    "id": "e8d9af10-8368-41e4-ab44-3b1ad91cbe83",
     "name": "Habit 3"
   },
   {
+    "id": "e8d9af10-8368-41e4-ab44-3b1ad91cbe84",
     "name": "Habit 4"
   },
   {
+    "id": "e8d9af10-8368-41e4-ab44-3b1ad91cbe85",
     "name": "Habit 5"
   }
 ]

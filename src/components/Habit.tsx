@@ -1,15 +1,15 @@
 import React from "react";
 import getDoubleDigit from "../utils/doubleDigit";
 import {FaEdit, FaTrash} from "react-icons/fa";
+import {HabitInterface} from "../Types/habit";
 
 interface Props {
-    habit: {
-        name: string
-    },
-    daysInMonth: number
+    habit: HabitInterface,
+    daysInMonth: number,
+    onRemove : any
 }
 
-const Habit = ({habit, daysInMonth}: Props) => {
+const Habit = ({habit, daysInMonth, onRemove = (f: any) => f}: Props) => {
     const showModal = () => {
         // FIXME: сделать это посредством React в виртуальном DOM
         // document.querySelector("#habitNewName")!.value = habit.name
@@ -33,6 +33,7 @@ const Habit = ({habit, daysInMonth}: Props) => {
                     {habit.name}
                 </div>
                 {
+                    // TODO: выделить в отдельный компонент
                     // Выводим все дни месяца для этой привычки
                     days.map((day) => (
                         <div key={day} className="column is-narrow tracker">
@@ -49,10 +50,11 @@ const Habit = ({habit, daysInMonth}: Props) => {
                     </div>
                 </div>
                 {/*Иконка удаления*/}
+                {/*TODO: запрашивать подтверждение удаления*/}
                 <div className="column is-narrow habit-icons no-listener">
                     <div className="icon-text no-listener">
                     <span className="icon has-text-info no-listener">
-                        <FaTrash />
+                        <FaTrash onClick={() => onRemove(habit.id)} />
                     </span>
                     </div>
                 </div>
