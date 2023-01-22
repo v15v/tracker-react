@@ -18,6 +18,7 @@ const EditHabit = () => {
     }
 
     const Close = () => (
+        // FIXME: сделать это посредством React в виртуальном DOM
         document.querySelector(".modal")!.classList.remove("is-active")
     )
 
