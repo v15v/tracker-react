@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {v4} from 'uuid'
 import SelectMonth from "./SelectMonth";
-import EditHabit from "./EditHabit";
+import EditHabitModal from "./EditHabitModal";
 import AddHabit from "./AddHabit";
 import HabitList from "./HabitList";
 import {HabitInterface} from "../Types/habit";
@@ -12,6 +12,7 @@ interface Props {
 }
 
 const Main = ({habits: monthHabits, daysInMonth}: Props) => {
+    let oldHabitName = ""
     const [habits, setHabits] = useState(monthHabits);
     const onAddHabit = (e: any) => {
         if (e.key === "Enter") {
@@ -29,6 +30,39 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
         const newHabits = habits.filter(habit => habit.id !== id)
         setHabits(newHabits)
     }
+    const showModal = (id: string) => {
+        oldHabitName = habits.filter(habit => habit.id === id)[0].name
+        // FIXME: сделать это посредством React в виртуальном DOM
+        // console.log(document.querySelector("#habitNewName")!)
+        document.querySelector(".modal")!.classList.add("is-active")
+        document.querySelector("#habitNewName")!.setAttribute("value", oldHabitName)
+    }
+    // FIXME: type any
+    // FIXME: перетирает дефолтное значение. Только в первый раз value = oldHabitName,
+    //  все остальные разы value=""
+    const saveEditHabit = (e: any) => {
+        if (e.key === "Enter") {
+            const newName = e.target.value
+            // FIXME: убрать log
+            console.log(oldHabitName)
+            console.log(newName)
+            const habit = habits.filter(habit => habit.name === oldHabitName)[0]
+            habit.name = newName
+            console.log(habit)
+            const newHabits = habits.filter(habit => habit.name !== oldHabitName)
+            console.log(newHabits)
+            setHabits(newHabits)
+            e.target.value = ""
+            closeModal()
+        }
+    }
+
+    const closeModal = () => {
+        // FIXME: сделать это посредством React в виртуальном DOM
+        document.querySelector(".modal")!.classList.remove("is-active")
+    }
+
+
     return (<section className="section my-6">
             {/*Выводим поле выбора месяца и добавления новой привычки*/}
             <div className="container block is-widescreen">
@@ -47,9 +81,11 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
             </div>
             {/*Выводим список всех привычек на месяц*/}
             <HabitList habits={habits} daysInMonth={daysInMonth}
-                       onRemoveHabit={onRemoveHabitSave} />
+                       onRemoveHabit={onRemoveHabitSave}
+                       onEditHabit={showModal} />
             {/*Добавляем модальное окно для редактирования имени привычки*/}
-            <EditHabit />
+            <EditHabitModal onCloseModal={closeModal}
+                            onEditSave={saveEditHabit} />
         </section>
     )
 }

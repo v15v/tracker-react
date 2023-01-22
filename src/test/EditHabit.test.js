@@ -1,6 +1,6 @@
 import {cleanup, render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom'
-import EditHabit from "../components/EditHabit";
+import EditHabitModal from "../components/EditHabitModal";
 
 // Note: running cleanup afterEach is done automatically for you in @testing-library/react@9.0.0 or higher
 // unmount and cleanup DOM after the test is finished.
@@ -14,7 +14,7 @@ afterEach(cleanup);
 describe('EditHabit', () => {
     it("renders the Footer copyright", () => {
         const footer = {copyright: "Footer"}
-        render(<EditHabit/>)
+        render(<EditHabitModal/>)
 
         expect(screen.getByText(/Footer/)).toBeInTheDocument()
     })
