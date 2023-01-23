@@ -1,7 +1,7 @@
 import React from "react";
 import getDoubleDigit from "../utils/doubleDigit";
 import {FaEdit, FaTrash} from "react-icons/fa";
-import {HabitInterface} from "../Types/habit";
+import {HabitInterface} from "../types/habit";
 
 interface Props {
     habit: HabitInterface,

@@ -1,6 +1,6 @@
 import React from 'react'
 import Habit from "./Habit";
-import {HabitInterface} from '../Types/habit'
+import {HabitInterface} from '../types/habit'
 
 interface Props {
     habits: HabitInterface[],

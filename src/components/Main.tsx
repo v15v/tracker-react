@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {v4} from 'uuid'
 import SelectMonth from "./SelectMonth";
 import EditHabitModal from "./EditHabitModal";
 import AddHabit from "./AddHabit";
 import HabitList from "./HabitList";
-import {HabitInterface} from "../Types/habit";
+import {HabitInterface} from "../types/habit";
 
 interface Props {
     habits: HabitInterface[],
@@ -16,10 +16,6 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
     const [habits, setHabits] = useState(monthHabits);
     const [modalActive, setModalActive] = useState(false)
     const [modalInputDefaultValue, setModalInputDefaultValue] = useState("defaultValue")
-    // // Similar to componentDidMount and componentDidUpdate:
-    // useEffect(() => {
-    //     document.querySelector("#habitNewName")!.setAttribute("value", oldHabitName)
-    // });
     const onAddHabit = (e: any) => {
         if (e.key === "Enter") {
             const newHabit = {
