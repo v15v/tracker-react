@@ -32,6 +32,7 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
         const newHabits = habits.filter(habit => habit.id !== id)
         setHabits(newHabits)
     }
+    // src/components/Habit.tsx - здесь компонент <Habit />
     // При нажатии на иконку редактирования всплывает модальное окно.
     // В этом окне один input. Нужно в этот input вставить имя привычки,
     // которую выбрали для редактирования. Использую useState modalInputDefaultValue.
