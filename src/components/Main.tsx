@@ -42,6 +42,17 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
     // Получается, что мы видим некорректное значение в поле input,
     // но при этом в DOM дереве значение value корректное - имя привычки, которую выбрали для редактирования.
     // Как сделать так, чтобы в input отразилось то, что я хочу?
+    //
+    // Выхлоп в консоли:
+    // Show modal 1: modalInputDefaultValue: defaultValue
+    // Show modal 2: oldHabitName: defaulOldHabitName
+    // Show modal 3: oldName: Habit 1
+    // Show modal 4: oldHabitName: defaulOldHabitName
+    // Show modal 5: modalInputDefaultValue: defaultValue
+    // Show modal 6: modalActive: false
+    // Show modal 7: modalActive: false
+    // <div class="modal is-active">…</div> flex
+
     const showModal = (id: string) => {
         console.log("Show modal 1: modalInputDefaultValue:", modalInputDefaultValue)
         console.log("Show modal 2: oldHabitName:", oldHabitName)
