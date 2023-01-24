@@ -74,6 +74,7 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
                        onRemoveHabit={onRemoveHabitSave}
                        onEditHabit={showModal} />
             {/*Добавляем модальное окно для редактирования имени привычки*/}
+            {/*Оно выводится, когда была нажата кнопка редактирования привычки*/}
             {modalActive && <EditHabitModal onCloseModal={closeModal}
                                             onEditSave={saveEditHabit}
                                             value={oldHabitName} />
