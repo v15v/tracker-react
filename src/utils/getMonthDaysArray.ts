@@ -1,7 +1,7 @@
-// Создаем массив дней месяца из двухзначных чисел
-// [01, 02, 03, ... , daysInMonth]
 import getDoubleDigit from "./doubleDigit";
 
+// Создаем массив дней месяца из двухзначных чисел
+// [01, 02, 03, ... , daysInMonth]
 const getMonthDaysArray = (daysInMonth: number) => {
     let days = []
     for (let i = 0; i < daysInMonth; i++) {
