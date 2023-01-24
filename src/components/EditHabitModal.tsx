@@ -18,7 +18,7 @@ const EditHabitModal = ({
             <div className="modal-content">
                 <input className="input" type="text"
                        placeholder="Введите имя привычки"
-                       id="habitNewName" defaultValue={value}
+                       defaultValue={value}
                        onKeyDown={onEditSave} />
             </div>
             <button className="modal-close is-large"

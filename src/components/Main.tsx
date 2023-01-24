@@ -12,7 +12,7 @@ interface Props {
 }
 
 const Main = ({habits: monthHabits, daysInMonth}: Props) => {
-    const [oldHabitName, setOldHabitName] = React.useState("defaulOldHabitName")
+    const [oldHabitName, setOldHabitName] = React.useState("")
     const [habits, setHabits] = React.useState(monthHabits);
     const [modalActive, setModalActive] = React.useState(false)
     const onAddHabit = (e: any) => {
@@ -24,6 +24,7 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
             }
             const newHabits = [...habits, newHabit]
             setHabits(newHabits)
+            // Очищаем input
             e.target.value = ""
         }
     }
@@ -33,18 +34,17 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
     }
 
     const showModal = (id: string) => {
-        const oldName = habits.filter(habit => habit.id === id)[0].name
-        setOldHabitName(oldName)
-        modalActive ? setModalActive(false) : setModalActive(true)
+        const oldHabitName = habits.filter(habit => habit.id === id)[0].name
+        setOldHabitName(oldHabitName)
+        setModalActive(true)
     }
     // FIXME: type any
     const saveEditHabit = (e: any) => {
         if (e.key === "Enter") {
-            const newName = e.target.value
+            const newHabitName = e.target.value
             const habit = habits.filter(habit => habit.name === oldHabitName)[0]
-            habit.name = newName
-            const newHabits = habits.filter(habit => habit.name !== oldHabitName)
-            setHabits(newHabits)
+            habit.name = newHabitName
+            setHabits(habits)
             closeModal()
         }
     }

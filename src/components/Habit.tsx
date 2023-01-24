@@ -1,7 +1,7 @@
 import React from "react";
-import getDoubleDigit from "../utils/doubleDigit";
 import {FaEdit, FaTrash} from "react-icons/fa";
 import {HabitInterface} from "../types/habit";
+import getMonthDaysArray from "../utils/getMonthDaysArray";
 
 interface Props {
     habit: HabitInterface,
@@ -16,13 +16,7 @@ const Habit = ({
                    onRemove = (f: any) => f,
                    onEdit = (f: any) => f
                }: Props) => {
-    // Создаем массив дней месяца из двухзначных чисел
-    // [01, 02, 03, ... , daysInMonth]
-    let days = []
-    for (let i = 0; i < daysInMonth; i++) {
-        let day = getDoubleDigit(i + 1)
-        days.push(day)
-    }
+    const days = getMonthDaysArray(daysInMonth)
 
     // Формируем строку для конкретной привычки
     return (
