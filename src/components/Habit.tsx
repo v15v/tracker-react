@@ -1,7 +1,7 @@
 import React from "react";
 import {FaEdit, FaTrash} from "react-icons/fa";
 import {HabitInterface} from "../types/habit";
-import getMonthDaysArray from "../utils/getMonthDaysArray";
+import DaysList from "./DaysList";
 
 interface Props {
     habit: HabitInterface,
@@ -16,7 +16,6 @@ const Habit = ({
                    onRemove = (f: any) => f,
                    onEdit = (f: any) => f
                }: Props) => {
-    const days = getMonthDaysArray(daysInMonth)
 
     // Формируем строку для конкретной привычки
     return (
@@ -26,15 +25,8 @@ const Habit = ({
                     className="column has-text-right tracker has-text-weight-bold habit-name no-listener">
                     {habit.name}
                 </div>
-                {
-                    // TODO: выделить в отдельный компонент.
-                    // Выводим все дни месяца для этой привычки
-                    days.map((day) => (
-                        <div key={day} className="column is-narrow tracker">
-                            {day}
-                        </div>
-                    ))
-                }
+                {/*Выводим все дни месяца для этой привычки*/}
+                <DaysList daysInMonth={daysInMonth} />
                 {/*Иконка редактирования*/}
                 <div className="column is-narrow habit-icons no-listener">
                     <div className="icon-text no-listener">
