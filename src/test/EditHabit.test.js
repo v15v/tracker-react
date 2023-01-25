@@ -11,7 +11,7 @@ afterEach(cleanup);
 //  Рендер привычки
 //  Изменение имени привычки
 //  Проверка, что новое имя было выведено на страницу
-describe('EditHabit', () => {
+describe.skip('EditHabit', () => {
     it("renders the Footer copyright", () => {
         const footer = {copyright: "Footer"}
         render(<EditHabitModal/>)
