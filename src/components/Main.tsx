@@ -62,6 +62,27 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
         console.log(day)
         console.log(dayStatus)
         console.log(habit)
+        switch (dayStatus) {
+            case "free":
+                habit.planned.push(parseInt(day))
+                const targetHabit = habits.filter(habit => habit.name === habit.name)[0]
+                targetHabit.planned = habit.planned
+                setHabits(habits)
+                console.log(habits)
+                break;
+            // case "planned":
+            //     habit.planned.push(parseInt(day))
+            //     habit.done.push(parseInt(day))
+            //     break;
+            // case значение3:
+            //     инструкция
+            //     break;
+            // case значение4:
+            //     инструкция
+            //     break;
+            // default:
+            //     инструкция
+        }
     }
 
     return (<section className="section my-6">

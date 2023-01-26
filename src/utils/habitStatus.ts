@@ -29,7 +29,7 @@ const GetDayStatus = ({
             if (undone.indexOf(parseInt(day)) >= 0) {
                 return "undone"
             } else {
-                return ""
+                return "free"
             }
         }
     }
