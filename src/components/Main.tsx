@@ -17,10 +17,14 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
     const [modalActive, setModalActive] = React.useState(false)
     const onAddHabit = (e: any) => {
         if (e.key === "Enter") {
-            const newHabit = {
+            const newHabit: HabitInterface = {
                 // Генерируем id
                 id: v4(),
-                name: e.target.value
+                // name: e.target.value,
+                name: "Habit test",
+                planned: [1],
+                done: [2],
+                undone: [3]
             }
             const newHabits = [...habits, newHabit]
             setHabits(newHabits)

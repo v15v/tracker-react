@@ -16,6 +16,10 @@ const Habit = ({
                    onRemove = (f: any) => f,
                    onEdit = (f: any) => f
                }: Props) => {
+    const OnClickDayInHabit = (day: string, habit: HabitInterface) => {
+
+        console.log("Day:", day, "Habit:", habit)
+    }
 
     // Формируем строку для конкретной привычки
     return (
@@ -26,7 +30,12 @@ const Habit = ({
                     {habit.name}
                 </div>
                 {/*Выводим все дни месяца для этой привычки*/}
-                <DaysList daysInMonth={daysInMonth} />
+                {/*TODO: передавать статус каждого дня*/}
+                <DaysList daysInMonth={daysInMonth}
+                          planned={habit.planned}
+                          done={habit.done}
+                          undone={habit.undone}
+                          onClickDay={(day: string) => OnClickDayInHabit(day, habit)} />
                 {/*Иконка редактирования*/}
                 <div className="column is-narrow habit-icons no-listener">
                     <div className="icon-text no-listener">
