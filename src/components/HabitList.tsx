@@ -10,12 +10,6 @@ interface Props {
     onClickDayInHabitList: any
 }
 
-interface OnSetHabitStatusProps {
-    day: string,
-    dayStatus: string,
-    habit: HabitInterface
-}
-
 const HabitList = ({
                        habits,
                        daysInMonth,
@@ -29,11 +23,11 @@ const HabitList = ({
             <Habit key={habit.id} habit={habit}
                    daysInMonth={daysInMonth} onRemove={onRemoveHabit}
                    onEdit={onEditHabit}
-                   onClickDayInHabit={({
-                                           day,
-                                           dayStatus,
-                                           habit
-                                       }: OnSetHabitStatusProps) => onClickDayInHabitList(day, dayStatus, habit)} />
+                   onClickDayInHabit={(
+                       day: string,
+                       dayStatus: string,
+                       habit: HabitInterface
+                   ) => onClickDayInHabitList(day, dayStatus, habit)} />
         )}
     </div>
 )

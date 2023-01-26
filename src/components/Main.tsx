@@ -5,7 +5,6 @@ import EditHabitModal from "./EditHabitModal";
 import AddHabit from "./AddHabit";
 import HabitList from "./HabitList";
 import {HabitInterface} from "../types/habit";
-import {SetHabitStatus} from "../utils/habitStatus";
 
 interface Props {
     habits: HabitInterface[],
@@ -58,6 +57,13 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
         setModalActive(false)
     }
 
+    // TODO: убрать полученный день из массива полученного статуса и добавить в следующий массив статуса
+    const SetHabitStatus = (day: string, dayStatus: string, habit: HabitInterface) => {
+        console.log(day)
+        console.log(dayStatus)
+        console.log(habit)
+    }
+
     return (<section className="section my-6">
             {/*Выводим поле выбора месяца и добавления новой привычки*/}
             <div className="container block is-widescreen">
@@ -78,7 +84,12 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
             <HabitList habits={habits} daysInMonth={daysInMonth}
                        onRemoveHabit={onRemoveHabitSave}
                        onEditHabit={showModal}
-                       onClickDayInHabitList={() => SetHabitStatus()}
+                       onClickDayInHabitList={(
+                           day: string,
+                           dayStatus: string,
+                           habit: HabitInterface
+                       ) => SetHabitStatus(day, dayStatus, habit)
+                       }
             />
             {/*Добавляем модальное окно для редактирования имени привычки*/}
             {/*Оно выводится, когда была нажата кнопка редактирования привычки*/}

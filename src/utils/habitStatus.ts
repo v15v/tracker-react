@@ -5,11 +5,12 @@ interface DayStatusInterface {
     day: string
 }
 
-// Устанавливает статус привычки
-const SetHabitStatus = (day: string, dayStatus: string) => {
-    console.log(day)
-    console.log(dayStatus)
-}
+// // Устанавливает статус привычки
+// const SetHabitStatus = (day: string, dayStatus: string, habit: HabitInterface) => {
+//     console.log(day)
+//     console.log(dayStatus)
+//     console.log(habit)
+// }
 
 // Возвращает статус для указанного дня месяца.
 // Проверяет в каком из массивов статусов находится указанный день.
@@ -34,4 +35,4 @@ const GetDayStatus = ({
     }
 }
 
-export {SetHabitStatus, GetDayStatus}
+export {GetDayStatus}
