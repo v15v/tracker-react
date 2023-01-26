@@ -5,6 +5,7 @@ import EditHabitModal from "./EditHabitModal";
 import AddHabit from "./AddHabit";
 import HabitList from "./HabitList";
 import {HabitInterface} from "../types/habit";
+import {SetHabitStatus} from "../utils/habitStatus";
 
 interface Props {
     habits: HabitInterface[],
@@ -76,7 +77,9 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
             {/*Выводим список всех привычек на месяц*/}
             <HabitList habits={habits} daysInMonth={daysInMonth}
                        onRemoveHabit={onRemoveHabitSave}
-                       onEditHabit={showModal} />
+                       onEditHabit={showModal}
+                       onClickDayInHabitList={() => SetHabitStatus()}
+            />
             {/*Добавляем модальное окно для редактирования имени привычки*/}
             {/*Оно выводится, когда была нажата кнопка редактирования привычки*/}
             {modalActive && <EditHabitModal onCloseModal={closeModal}

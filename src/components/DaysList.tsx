@@ -1,5 +1,6 @@
 import React from "react";
 import getMonthDaysArray from "../utils/getMonthDaysArray";
+import {GetDayStatus} from "../utils/habitStatus";
 
 interface Props {
     daysInMonth: number,
@@ -14,24 +15,10 @@ const DaysList = ({daysInMonth, onClickDay, planned, done, undone}: Props) => {
     return (
         <>
             {days.map((day) => {
-                const dayStatus = () => {
-                    if (planned.indexOf(parseInt(day)) >= 0) {
-                        return "planned"
-                    } else {
-                        if (done.indexOf(parseInt(day)) >= 0) {
-                            return "done"
-                        } else {
-                            if (undone.indexOf(parseInt(day)) >= 0) {
-                                return "undone"
-                            } else {
-                                return ""
-                            }
-                        }
-                    }
-                }
+                const dayStatus = GetDayStatus({planned, done, undone, day})
                 return <div key={day}
-                            className={`column is-narrow tracker ${dayStatus()}`}
-                            onClick={() => onClickDay(day)}>
+                            className={`column is-narrow tracker ${dayStatus}`}
+                            onClick={() => onClickDay(day, dayStatus)}>
                     {day}
                 </div>
             })}

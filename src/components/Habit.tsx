@@ -7,19 +7,17 @@ interface Props {
     habit: HabitInterface,
     daysInMonth: number,
     onRemove: any,
-    onEdit: any
+    onEdit: any,
+    onClickDayInHabit: any
 }
 
 const Habit = ({
                    habit,
                    daysInMonth,
                    onRemove = (f: any) => f,
-                   onEdit = (f: any) => f
+                   onEdit = (f: any) => f,
+                   onClickDayInHabit = (f: any) => f
                }: Props) => {
-    const OnClickDayInHabit = (day: string, habit: HabitInterface) => {
-
-        console.log("Day:", day, "Habit:", habit)
-    }
 
     // Формируем строку для конкретной привычки
     return (
@@ -35,7 +33,7 @@ const Habit = ({
                           planned={habit.planned}
                           done={habit.done}
                           undone={habit.undone}
-                          onClickDay={(day: string) => OnClickDayInHabit(day, habit)} />
+                          onClickDay={(day: string, dayStatus: string) => onClickDayInHabit(day, dayStatus, habit)} />
                 {/*Иконка редактирования*/}
                 <div className="column is-narrow habit-icons no-listener">
                     <div className="icon-text no-listener">
