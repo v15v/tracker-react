@@ -6,6 +6,7 @@ import AddHabit from "./AddHabit";
 import HabitList from "./HabitList";
 import {HabitInterface} from "../types/habit";
 import {SetHabitStatus} from "../utils/habitStatus";
+import {SaveToLocalStorage} from "../utils/storage";
 
 interface Props {
     habits: HabitInterface[],
@@ -16,16 +17,20 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
     const [oldHabitName, setOldHabitName] = React.useState("")
     const [habits, setHabits] = React.useState(monthHabits);
     const [modalActive, setModalActive] = React.useState(false)
+    React.useEffect(() => {
+        SaveToLocalStorage("january", habits)
+    }, [habits]);
+
     const onAddHabit = (e: any) => {
         if (e.key === "Enter") {
+            console.log(e)
             const newHabit: HabitInterface = {
                 // Генерируем id
                 id: v4(),
-                // name: e.target.value,
-                name: "Habit test",
-                planned: [1],
-                done: [2],
-                undone: [3]
+                name: e.target.value,
+                planned: [],
+                done: [],
+                undone: []
             }
             const newHabits = [...habits, newHabit]
             setHabits(newHabits)
@@ -37,7 +42,6 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
         const newHabits = habits.filter(habit => habit.id !== id)
         setHabits(newHabits)
     }
-
     const showModal = (id: string) => {
         const oldHabitName = habits.filter(habit => habit.id === id)[0].name
         setOldHabitName(oldHabitName)
@@ -53,9 +57,11 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
             closeModal()
         }
     }
-
     const closeModal = () => {
         setModalActive(false)
+    }
+    const onMonthSelected = (month: any) => {
+        console.log("Выбран месяц:", month)
     }
 
 
@@ -65,7 +71,7 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
                 <div className="tile is-ancestor">
                     <div className="tile">
                         <div className="select block">
-                            <SelectMonth />
+                            <SelectMonth onSelected={onMonthSelected} />
                         </div>
                     </div>
                     <div className="tile">
