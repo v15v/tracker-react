@@ -7,16 +7,12 @@ import footer from './data/footer.json'
 import Header from './components/Header'
 import Main from './components/Main'
 import Footer from './components/Footer'
-import {GetHabits} from "./utils/storage";
-
-let daysInMonth = 31
-let habits = GetHabits("january")
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 root.render(
     <React.StrictMode>
         <Header header={header} />
-        <Main habits={habits} daysInMonth={daysInMonth} />
+        <Main />
         <Footer footer={footer} />
     </React.StrictMode>
 );
