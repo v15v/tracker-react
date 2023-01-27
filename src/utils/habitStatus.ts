@@ -1,3 +1,5 @@
+import {HabitInterface} from "../types/habit";
+
 interface DayStatusInterface {
     planned: number[],
     done: number[],
@@ -6,11 +8,37 @@ interface DayStatusInterface {
 }
 
 // // Устанавливает статус привычки
-// const SetHabitStatus = (day: string, dayStatus: string, habit: HabitInterface) => {
-//     console.log(day)
-//     console.log(dayStatus)
-//     console.log(habit)
-// }
+const SetHabitStatus = (day: string, dayStatus: string, habit: HabitInterface, setHabits: any, habits: HabitInterface[]) => {
+    let newHabits: HabitInterface[]
+    switch (dayStatus) {
+        case "free":
+            habit.planned.push(parseInt(day))
+            const targetHabit = habits.filter(h => h.name === habit.name)[0]
+            targetHabit.planned = habit.planned
+            newHabits = [...habits]
+            setHabits(newHabits)
+            break;
+        case "planned":
+            habit.planned = habit.planned.filter((d) => d !== parseInt(day))
+            habit.done.push(parseInt(day))
+            newHabits = [...habits]
+            setHabits(newHabits)
+            break;
+        case "done":
+            habit.done = habit.done.filter((d) => d !== parseInt(day))
+            habit.undone.push(parseInt(day))
+            newHabits = [...habits]
+            setHabits(newHabits)
+            break;
+        case "undone":
+            habit.undone = habit.undone.filter((d) => d !== parseInt(day))
+            newHabits = [...habits]
+            setHabits(newHabits)
+            break;
+        default:
+            console.warn("Некорректный статус дня:", dayStatus)
+    }
+}
 
 // Возвращает статус для указанного дня месяца.
 // Проверяет в каком из массивов статусов находится указанный день.
@@ -35,4 +63,4 @@ const GetDayStatus = ({
     }
 }
 
-export {GetDayStatus}
+export {GetDayStatus, SetHabitStatus}

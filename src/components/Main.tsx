@@ -5,6 +5,7 @@ import EditHabitModal from "./EditHabitModal";
 import AddHabit from "./AddHabit";
 import HabitList from "./HabitList";
 import {HabitInterface} from "../types/habit";
+import {SetHabitStatus} from "../utils/habitStatus";
 
 interface Props {
     habits: HabitInterface[],
@@ -57,33 +58,6 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
         setModalActive(false)
     }
 
-    // TODO: убрать полученный день из массива полученного статуса и добавить в следующий массив статуса
-    const SetHabitStatus = (day: string, dayStatus: string, habit: HabitInterface) => {
-        console.log(day)
-        console.log(dayStatus)
-        console.log(habit)
-        switch (dayStatus) {
-            case "free":
-                habit.planned.push(parseInt(day))
-                const targetHabit = habits.filter(habit => habit.name === habit.name)[0]
-                targetHabit.planned = habit.planned
-                setHabits(habits)
-                console.log(habits)
-                break;
-            // case "planned":
-            //     habit.planned.push(parseInt(day))
-            //     habit.done.push(parseInt(day))
-            //     break;
-            // case значение3:
-            //     инструкция
-            //     break;
-            // case значение4:
-            //     инструкция
-            //     break;
-            // default:
-            //     инструкция
-        }
-    }
 
     return (<section className="section my-6">
             {/*Выводим поле выбора месяца и добавления новой привычки*/}
@@ -109,7 +83,7 @@ const Main = ({habits: monthHabits, daysInMonth}: Props) => {
                            day: string,
                            dayStatus: string,
                            habit: HabitInterface
-                       ) => SetHabitStatus(day, dayStatus, habit)
+                       ) => SetHabitStatus(day, dayStatus, habit, setHabits, habits)
                        }
             />
             {/*Добавляем модальное окно для редактирования имени привычки*/}
