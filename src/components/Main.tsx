@@ -1,12 +1,12 @@
-import React from "react";
+import React from "react"
 import {v4} from 'uuid'
-import SelectMonth from "./SelectMonth";
-import EditHabitModal from "./EditHabitModal";
-import AddHabit from "./AddHabit";
-import HabitList from "./HabitList";
-import {HabitInterface} from "../types/habit";
-import {SetHabitStatus} from "../utils/habitStatus";
-import {GetHabits, SaveToLocalStorage} from "../utils/storage";
+import SelectMonth from "./SelectMonth"
+import EditHabitModal from "./EditHabitModal"
+import AddHabit from "./AddHabit"
+import HabitList from "./HabitList"
+import {HabitInterface} from "../types/habit"
+import {SetHabitStatus} from "../utils/habitStatus"
+import axios from "axios";
 
 const Main = () => {
     const monthNames = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
@@ -16,16 +16,30 @@ const Main = () => {
     const defaultMonthID = date.getMonth()
     const defaultDaysInMonth = new Date(2023, defaultMonthID + 1, 0).getDate()
 
-    const monthHabits = GetHabits(monthNamesEn[defaultMonthID])
+    const defaultHabits: HabitInterface[] = []
+    // const monthHabits = GetHabits(monthNamesEn[defaultMonthID])
     const [selectedMonth, setSelectedMonth] = React.useState(defaultMonthID)
     const [oldHabitName, setOldHabitName] = React.useState("")
-    const [habits, setHabits] = React.useState(monthHabits);
+    const [habits, setHabits] = React.useState(defaultHabits)
     const [modalActive, setModalActive] = React.useState(false)
     const [daysInMonth, setDaysInMonth] = React.useState(defaultDaysInMonth)
+    const [monthUrl, setMonthUrl] = React.useState(monthNamesEn[defaultMonthID])
+    // React.useEffect(() => {
+    //     SaveToLocalStorage(monthNamesEn[selectedMonth], habits)
+    //     // eslint-disable-next-line
+    // }, [habits])
     React.useEffect(() => {
-        SaveToLocalStorage(monthNamesEn[selectedMonth], habits)
-        // eslint-disable-next-line
-    }, [habits]);
+        axios({
+            method: 'get',
+            url: `http://localhost:8055/items/months?fields=habits&filter[name][_eq]=${monthUrl}`,
+            responseType: 'json',
+            responseEncoding: 'utf8',
+            headers: {'Authorization': 'Bearer NT1ETf1uUeAkbmsoDd7EzUJghk1LpmmS'}
+        })
+            .then(({data}) => {
+                setHabits(data.data[0].habits)
+            }).catch(() => setHabits([]))
+    }, [monthUrl])
 
     const onAddHabit = (e: any) => {
         if (e.key === "Enter") {
@@ -69,7 +83,9 @@ const Main = () => {
     const onMonthSelected = (e: any) => {
         const selectedMonthId = parseInt(e.target.value)
         setSelectedMonth(selectedMonthId)
-        const newHabits = GetHabits(monthNamesEn[selectedMonthId])
+        // const newHabits = GetHabits(monthNamesEn[selectedMonthId])
+        setMonthUrl(monthNamesEn[selectedMonthId])
+        const newHabits = [...habits]
         setHabits(newHabits)
         // TODO: Вынести в отдельную функцию
         setDaysInMonth(new Date(2023, selectedMonthId + 1, 0).getDate())
