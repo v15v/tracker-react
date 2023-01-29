@@ -30,7 +30,4 @@ const CreateOnBackend = (month: string) => {
         .catch(error => console.error(error))
 }
 
-export {
-    CreateOnBackend,
-    UpdateOnBackend
-}
+export {CreateOnBackend, UpdateOnBackend}

@@ -40,9 +40,20 @@ const Main = () => {
             .then(({data}) => {
                 setHabits(data.data[0].habits)
                 setMonthIdBackend(data.data[0].id)
-            }).catch((data) => {
-            setHabits([])
-            CreateOnBackend(monthUrl)
+                console.log("Get data for:", monthUrl)
+            }).catch((error) => {
+            // FIXME: Сервер не сразу отдает свежие данные.
+            //  Получается запрос возвращает пустой элемент,
+            //  хотя данные мы уже записали и они есть в базе.
+            // FIXME: перезаписывает данные уже созданные пустым значением.
+            //  Надо отловить где он это делает.
+            console.error(error)
+            if (error.toString() === "TypeError: Cannot read properties of undefined (reading 'habits')") {
+                CreateOnBackend(monthUrl)
+                setHabits([])
+                console.log("Создан новый месяц")
+            }
+            console.warn("По данному месяцу нет информации")
         })
     }, [monthUrl])
 
