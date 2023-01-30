@@ -21,6 +21,7 @@ const Main = () => {
 
     const defaultHabits: HabitInterface[] = []
     const [selectedMonth, setSelectedMonth] = React.useState(defaultMonthID)
+    const [saveToBackend, setSaveToBackend] = React.useState(false)
     const [oldHabitName, setOldHabitName] = React.useState("")
     const [habits, setHabits] = React.useState(defaultHabits)
     const [modalActive, setModalActive] = React.useState(false)
@@ -28,7 +29,10 @@ const Main = () => {
     const [monthUrl, setMonthUrl] = React.useState(monthNamesEn[defaultMonthID])
     const [monthIdBackend, setMonthIdBackend] = React.useState("0")
     React.useEffect(() => {
-        UpdateOnBackend(monthIdBackend, habits)
+        if (saveToBackend) {
+            UpdateOnBackend(monthIdBackend, habits)
+            console.log("Save to backend")
+        }
         // eslint-disable-next-line
     }, [habits])
     React.useEffect(() => {
@@ -42,7 +46,6 @@ const Main = () => {
             .then(({data}) => {
                 setHabits(data.data[0].habits)
                 setMonthIdBackend(data.data[0].id)
-                console.log("Get data for:", monthUrl)
             }).catch((error) => {
             // FIXME: Сервер не сразу отдает свежие данные.
             //  Получается запрос возвращает пустой элемент,
@@ -53,7 +56,6 @@ const Main = () => {
             if (error.toString() === "TypeError: Cannot read properties of undefined (reading 'habits')") {
                 CreateOnBackend(monthUrl)
                 setHabits([])
-                console.log("Создан новый месяц")
             }
             console.warn("По данному месяцу нет информации")
         })
@@ -70,6 +72,7 @@ const Main = () => {
                 undone: []
             }
             const newHabits = [...habits, newHabit]
+            setSaveToBackend(true)
             setHabits(newHabits)
             // Очищаем input
             e.target.value = ""
@@ -77,6 +80,7 @@ const Main = () => {
     }
     const onRemoveHabitSave = (id: string) => {
         const newHabits = habits.filter((habit: HabitInterface) => habit.id !== id)
+        setSaveToBackend(true)
         setHabits(newHabits)
     }
     const showModal = (id: string) => {
@@ -91,6 +95,7 @@ const Main = () => {
             const newHabits = [...habits]
             const habit = newHabits.filter((habit: HabitInterface) => habit.name === oldHabitName)[0]
             habit.name = newHabitName
+            setSaveToBackend(true)
             setHabits(newHabits)
             closeModal()
         }
@@ -101,6 +106,7 @@ const Main = () => {
     const onMonthSelected = (e: any) => {
         const selectedMonthId = parseInt(e.target.value)
         setSelectedMonth(selectedMonthId)
+        setSaveToBackend(false)
         setMonthUrl(monthNamesEn[selectedMonthId])
         const newHabits = [...habits]
         setHabits(newHabits)
@@ -135,7 +141,7 @@ const Main = () => {
                            day: string,
                            dayStatus: string,
                            habit: HabitInterface
-                       ) => SetHabitStatus(day, dayStatus, habit, setHabits, habits)
+                       ) => SetHabitStatus(day, dayStatus, habit, setHabits, habits, setSaveToBackend)
                        }
             />
             {/*Добавляем модальное окно для редактирования имени привычки*/}
