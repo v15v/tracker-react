@@ -8,7 +8,8 @@ interface DayStatusInterface {
 }
 
 // // Устанавливает статус привычки
-const SetHabitStatus = (day: string, dayStatus: string, habit: HabitInterface, setHabits: any, habits: HabitInterface[]) => {
+const SetHabitStatus = (day: string, dayStatus: string, habit: HabitInterface, setHabits: any, habits: HabitInterface[], setSaveToBackend: any) => {
+    setSaveToBackend(true)
     let newHabits: HabitInterface[]
     switch (dayStatus) {
         case "free":
