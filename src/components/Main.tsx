@@ -9,6 +9,8 @@ import {SetHabitStatus} from "../utils/habitStatus"
 import axios from "axios";
 import {CreateOnBackend, UpdateOnBackend} from "../utils/storage";
 
+const myConf = require("../config.json")
+
 const Main = () => {
     const monthNames = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
     const monthNamesEn = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -34,7 +36,7 @@ const Main = () => {
         // TypeError: Cannot read properties of undefined (reading 'habits')
         axios({
             method: 'get',
-            url: `http://localhost:8055/items/months?fields=id,habits&filter[name][_eq]=${monthUrl}`,
+            url: `http://${myConf.host}:${myConf.port}/items/months?fields=id,habits&filter[name][_eq]=${monthUrl}`,
             headers: {'Authorization': 'Bearer NT1ETf1uUeAkbmsoDd7EzUJghk1LpmmS'}
         })
             .then(({data}) => {
