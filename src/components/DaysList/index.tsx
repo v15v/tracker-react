@@ -1,16 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import getMonthDaysArray from "../../utils/getMonthDaysArray";
 import {GetDayStatus} from "../../utils/habitStatus";
 import styles from './DaysList.module.sass'
 
 interface Props {
     daysInMonth: number,
-    onClickDay: any,
+    onClickDay: (day: string, dayStatus: string) => void,
     planned: number[],
     done: number[],
     undone: number[]
 }
 
+// Рендерим все дни для месяца.
 const DaysList = ({daysInMonth, onClickDay, planned, done, undone}: Props) => {
     const days = getMonthDaysArray(daysInMonth)
     return (

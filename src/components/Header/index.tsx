@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./Header.module.sass"
 
 interface Props {
     header: {
@@ -8,7 +9,7 @@ interface Props {
 }
 
 const Header = ({header}: Props) => (
-    <section className="hero is-info is-medium">
+    <section className={`hero is-info ${styles.isMedium}`}>
         <div className="hero-body">
             <div className="container is-widescreen">
                 <p className="title">
