@@ -41,7 +41,7 @@ const Main = () => {
         axios({
             method: 'get',
             url: `http://${myConf.host}:${myConf.port}/items/months?fields=id,habits&filter[name][_eq]=${monthUrl}`,
-            headers: {'Authorization': 'Bearer NT1ETf1uUeAkbmsoDd7EzUJghk1LpmmS'}
+            headers: {'Authorization': `Bearer ${myConf.token}`}
         })
             .then(({data}) => {
                 setHabits(data.data[0].habits)

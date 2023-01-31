@@ -8,7 +8,7 @@ const UpdateOnBackend = (id: string, habits: HabitInterface[]) => {
     axios({
             method: 'patch',
             url: `http://${myConf.host}:${myConf.port}/items/months/${id}`,
-            headers: {'Authorization': 'Bearer NT1ETf1uUeAkbmsoDd7EzUJghk1LpmmS'},
+            headers: {'Authorization': `Bearer ${myConf.token}`},
             data: {
                 "habits": habits
             }
@@ -22,7 +22,7 @@ const CreateOnBackend = (month: string) => {
     axios({
             method: 'post',
             url: `http://${myConf.host}:${myConf.port}/items/months`,
-            headers: {'Authorization': 'Bearer NT1ETf1uUeAkbmsoDd7EzUJghk1LpmmS'},
+            headers: {'Authorization': `Bearer ${myConf.token}`},
             data: {
                 "name": month,
                 "habits": []
