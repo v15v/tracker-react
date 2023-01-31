@@ -8,6 +8,7 @@ import {HabitInterface} from "../types/habit"
 import {SetHabitStatus} from "../utils/habitStatus"
 import axios from "axios";
 import {CreateOnBackend, UpdateOnBackend} from "../utils/storage";
+import {IsUnicumName} from "../utils/isUnicumName";
 
 const {host, port, token} = require("../config.json")
 
@@ -62,19 +63,22 @@ const Main = () => {
 
     const onAddHabit = (e: any) => {
         if (e.key === "Enter") {
-            const newHabit: HabitInterface = {
-                // Генерируем id
-                id: v4(),
-                name: e.target.value,
-                planned: [],
-                done: [],
-                undone: []
+            const habitName = e.target.value
+            if (IsUnicumName(habitName, habits)) {
+                const newHabit: HabitInterface = {
+                    // Генерируем id
+                    id: v4(),
+                    name: habitName,
+                    planned: [],
+                    done: [],
+                    undone: []
+                }
+                const newHabits = [...habits, newHabit]
+                setSaveToBackend(true)
+                setHabits(newHabits)
+                // Очищаем input
+                e.target.value = ""
             }
-            const newHabits = [...habits, newHabit]
-            setSaveToBackend(true)
-            setHabits(newHabits)
-            // Очищаем input
-            e.target.value = ""
         }
     }
     const onRemoveHabitSave = (id: string) => {
@@ -91,12 +95,14 @@ const Main = () => {
     const saveEditHabit = (e: any) => {
         if (e.key === "Enter") {
             const newHabitName = e.target.value
-            const newHabits = [...habits]
-            const habit = newHabits.filter((habit: HabitInterface) => habit.name === oldHabitName)[0]
-            habit.name = newHabitName
-            setSaveToBackend(true)
-            setHabits(newHabits)
-            closeModal()
+            if (IsUnicumName(newHabitName, habits)) {
+                const newHabits = [...habits]
+                const habit = newHabits.filter((habit: HabitInterface) => habit.name === oldHabitName)[0]
+                habit.name = newHabitName
+                setSaveToBackend(true)
+                setHabits(newHabits)
+                closeModal()
+            }
         }
     }
     const closeModal = () => {

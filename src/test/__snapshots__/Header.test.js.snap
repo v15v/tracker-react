@@ -6,7 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <section
-        class="hero is-info is-medium"
+        class="hero is-info isMedium"
       >
         <div
           class="hero-body"
@@ -31,7 +31,7 @@ Object {
   </body>,
   "container": <div>
     <section
-      class="hero is-info is-medium"
+      class="hero is-info isMedium"
     >
       <div
         class="hero-body"
@@ -113,7 +113,7 @@ Object {
   "baseElement": <body>
     <div>
       <section
-        class="hero is-info is-medium"
+        class="hero is-info isMedium"
       >
         <div
           class="hero-body"
@@ -134,7 +134,7 @@ Object {
   </body>,
   "container": <div>
     <section
-      class="hero is-info is-medium"
+      class="hero is-info isMedium"
     >
       <div
         class="hero-body"
