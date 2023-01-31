@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import getMonthDaysArray from "../../utils/getMonthDaysArray";
 import {GetDayStatus} from "../../utils/habitStatus";
 import styles from './DaysList.module.sass'
