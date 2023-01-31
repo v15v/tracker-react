@@ -1,14 +1,14 @@
 import {HabitInterface} from "../types/habit"
 import axios from "axios"
 
-const myConf = require("../config.json")
+const {host, port, token} = require("../config.json")
 
 const UpdateOnBackend = (id: string, habits: HabitInterface[]) => {
     // TODO: корректно обработать ошибку
     axios({
             method: 'patch',
-            url: `http://${myConf.host}:${myConf.port}/items/months/${id}`,
-            headers: {'Authorization': `Bearer ${myConf.token}`},
+            url: `http://${host}:${port}/items/months/${id}`,
+            headers: {'Authorization': `Bearer ${token}`},
             data: {
                 "habits": habits
             }
@@ -21,8 +21,8 @@ const CreateOnBackend = (month: string) => {
     // TODO: корректно обработать ошибку
     axios({
             method: 'post',
-            url: `http://${myConf.host}:${myConf.port}/items/months`,
-            headers: {'Authorization': `Bearer ${myConf.token}`},
+            url: `http://${host}:${port}/items/months`,
+            headers: {'Authorization': `Bearer ${token}`},
             data: {
                 "name": month,
                 "habits": []
