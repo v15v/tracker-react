@@ -1,7 +1,8 @@
 import React from "react";
 import {FaEdit, FaTrash} from "react-icons/fa";
-import {HabitInterface} from "../types/habit";
-import DaysList from "./DaysList";
+import {HabitInterface} from "../../types/habit";
+import DaysList from "../DaysList";
+import styles from "./Habit.module.sass"
 
 interface Props {
     habit: HabitInterface,
@@ -22,9 +23,9 @@ const Habit = ({
     // Формируем строку для конкретной привычки
     return (
         <>
-            <div className="columns is-multiline is-mobile no-listener">
+            <div className="columns is-multiline is-mobile">
                 <div
-                    className="column has-text-right tracker has-text-weight-bold habit-name no-listener">
+                    className={`column has-text-right ${styles.tracker} has-text-weight-bold ${styles.habitName}`}>
                     {habit.name}
                 </div>
                 {/*Выводим все дни месяца для этой привычки*/}
@@ -35,18 +36,18 @@ const Habit = ({
                           undone={habit.undone}
                           onClickDay={(day: string, dayStatus: string) => onClickDayInHabit(day, dayStatus, habit)} />
                 {/*Иконка редактирования*/}
-                <div className="column is-narrow habit-icons no-listener">
-                    <div className="icon-text no-listener">
-                      <span className="icon has-text-info no-listener">
+                <div className={`column is-narrow ${styles.habitIcons}`}>
+                    <div className="icon-text">
+                      <span className="icon has-text-info">
                           <FaEdit onClick={() => onEdit(habit.id)} />
                       </span>
                     </div>
                 </div>
                 {/*Иконка удаления*/}
                 {/*TODO: запрашивать подтверждение удаления*/}
-                <div className="column is-narrow habit-icons no-listener">
-                    <div className="icon-text no-listener">
-                    <span className="icon has-text-info no-listener">
+                <div className={`column is-narrow ${styles.habitIcons}`}>
+                    <div className="icon-text">
+                    <span className="icon has-text-info">
                         <FaTrash onClick={() => onRemove(habit.id)} />
                     </span>
                     </div>

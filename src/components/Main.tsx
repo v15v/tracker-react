@@ -31,7 +31,6 @@ const Main = () => {
     React.useEffect(() => {
         if (saveToBackend) {
             UpdateOnBackend(monthIdBackend, habits)
-            console.log("Save to backend")
         }
         // eslint-disable-next-line
     }, [habits])
