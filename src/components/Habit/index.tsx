@@ -29,7 +29,6 @@ const Habit = ({
                     {habit.name}
                 </div>
                 {/*Выводим все дни месяца для этой привычки*/}
-                {/*TODO: передавать статус каждого дня*/}
                 <DaysList daysInMonth={daysInMonth}
                           planned={habit.planned}
                           done={habit.done}
@@ -44,7 +43,7 @@ const Habit = ({
                     </div>
                 </div>
                 {/*Иконка удаления*/}
-                {/*TODO: запрашивать подтверждение удаления*/}
+                {/*TODO: Скрывать при удалении, а не удалять из базы*/}
                 <div className={`column is-narrow ${styles.habitIcons}`}>
                     <div className="icon-text">
                     <span className="icon has-text-info">
