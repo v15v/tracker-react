@@ -23,7 +23,8 @@ const Habit = ({
     // Формируем строку для конкретной привычки
     return (
         <>
-            <div className="columns is-multiline is-mobile">
+            <div
+                className={`columns is-multiline is-mobile ${habit.active ? "" : "is-hidden"}`}>
                 <div
                     className={`column has-text-right ${styles.tracker} has-text-weight-bold ${styles.habitName}`}>
                     {habit.name}

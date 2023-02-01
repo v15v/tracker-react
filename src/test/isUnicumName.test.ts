@@ -6,6 +6,7 @@ const janHabits = [
     {
         "id": "4e97442-2398-4f62-8091-4eb414d34ebc",
         "name": "Jan 1",
+        "active": true,
         "planned": [
             1,
             10
@@ -21,6 +22,7 @@ const janHabits = [
     {
         "id": "4997442-2398-4f62-8091-4eb414d34ebc",
         "name": "Jan 2",
+        "active": true,
         "planned": [
             12
         ],
@@ -34,6 +36,7 @@ const janHabits = [
     {
         "id": "49e9742-2398-4f62-8091-4eb414d34ebc",
         "name": "Jan 3",
+        "active": true,
         "planned": [
             1,
         ],

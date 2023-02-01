@@ -66,6 +66,7 @@ const Main = () => {
                     // Генерируем id
                     id: v4(),
                     name: habitName,
+                    active: true,
                     planned: [],
                     done: [],
                     undone: []
@@ -78,8 +79,11 @@ const Main = () => {
             }
         }
     }
+    // Деактивируем привычку
     const onRemoveHabitSave = (id: string) => {
-        const newHabits = habits.filter((habit: HabitInterface) => habit.id !== id)
+        const newHabits = [...habits]
+        const habit = newHabits.filter((habit: HabitInterface) => habit.id === id)[0]
+        habit.active = false
         setSaveToBackend(true)
         setHabits(newHabits)
     }
