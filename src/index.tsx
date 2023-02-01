@@ -1,17 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import 'bulma/css/bulma.css'
-import header from './data/header.json'
-import footer from './data/footer.json'
-import Header from './components/Header'
-import Main from './components/Main'
-import Footer from './components/Footer'
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Tracker from "./Pages/Tracker";
+import DashboardPage from "./Pages/Dashboard";
+import CalorieDiaryPage from "./Pages/CalorieDiary";
+import NotFoundPage from "./Pages/NotFound";
+
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 root.render(
     <React.StrictMode>
-        <Header header={header} />
-        <Main />
-        <Footer footer={footer} />
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Tracker />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/calorie" element={<CalorieDiaryPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+        </BrowserRouter>
     </React.StrictMode>
-);
+)
