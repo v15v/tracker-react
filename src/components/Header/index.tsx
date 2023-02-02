@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Header.module.sass"
+import NavBar from "../NavBar";
 
 interface Props {
     header: {
@@ -20,6 +21,7 @@ const Header = ({header}: Props) => (
                 </p>
             </div>
         </div>
+        <NavBar />
     </section>
 )
 
