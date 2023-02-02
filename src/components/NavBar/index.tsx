@@ -1,13 +1,14 @@
 import React from 'react'
 import {Link} from "react-router-dom";
+import styles from './NavBar.module.sass'
 
-const NotFound = () => {
+const NavBar = () => {
     return (
         <nav className="navbar" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
             </div>
             <div className="navbar-menu">
-                <div className="navbar-end">
+                <div className={styles.navbarEnd}>
                     <Link to={"/"} className="navbar-item">
                         Tracker
                     </Link>
@@ -17,13 +18,10 @@ const NotFound = () => {
                     <Link to={"/calorie"} className="navbar-item">
                         CalorieDiary
                     </Link>
-                    <Link to={"/login"} className="navbar-item">
-                        Login
-                    </Link>
                 </div>
             </div>
         </nav>
     )
 }
 
-export default NotFound
+export default NavBar
