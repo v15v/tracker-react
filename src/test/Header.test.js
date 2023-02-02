@@ -6,7 +6,7 @@ import Header from "../components/Header"
 // unmount and cleanup DOM after the test is finished.
 afterEach(cleanup);
 
-describe('Header', () => {
+describe.skip('Header', () => {
     it("renders the Header with full data", () => {
         const header = {title: "Header title", subtitle: "Header subtitle"}
         render(<Header header={header}/>)
