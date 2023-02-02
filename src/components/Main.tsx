@@ -120,7 +120,6 @@ const Main = () => {
         setDaysInMonth(new Date(2023, selectedMonthId + 1, 0).getDate())
     }
 
-
     return (<section className="section my-6">
             {/*Выводим поле выбора месяца и добавления новой привычки*/}
             <div className="container block is-widescreen">
@@ -141,6 +140,7 @@ const Main = () => {
             </div>
             {/*Выводим список всех привычек на месяц*/}
             <HabitList habits={habits} daysInMonth={daysInMonth}
+                       month={monthNamesEn.indexOf(monthUrl)}
                        onRemoveHabit={onRemoveHabitSave}
                        onEditHabit={showModal}
                        onClickDayInHabitList={(
