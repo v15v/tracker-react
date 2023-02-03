@@ -2,8 +2,6 @@ import React from 'react'
 import styles from './Login.module.sass'
 import axios from "axios";
 
-const {host, port, token} = require("../../config.json")
-
 interface Props {
     setToken: (f: any) => void
 }
@@ -16,8 +14,8 @@ interface Credentials {
 const loginUser = async ({username, password}: Credentials) => {
     const userData = await axios({
         method: 'get',
-        url: `http://${host}:${port}/items/users?fields=password,token&filter[username][_eq]=${username}`,
-        headers: {'Authorization': `Bearer ${token}`}
+        url: `http://${process.env.REACT_APP_DIRECTUS_HOST}:${process.env.REACT_APP_DIRECTUS_PORT}/items/users?fields=password,token&filter[username][_eq]=${username}`,
+        headers: {'Authorization': `Bearer ${process.env.REACT_APP_DIRECTUS_TOKEN}`}
     })
         .then(({data}) => {
             return data.data[0]

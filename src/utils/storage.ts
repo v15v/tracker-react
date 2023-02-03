@@ -1,14 +1,12 @@
 import {HabitInterface} from "../types/habit"
 import axios from "axios"
 
-const {host, port, token} = require("../config.json")
-
 const UpdateOnBackend = (id: string, habits: HabitInterface[]) => {
     // TODO: корректно обработать ошибку
     axios({
             method: 'patch',
-            url: `http://${host}:${port}/items/months/${id}`,
-            headers: {'Authorization': `Bearer ${token}`},
+            url: `http://${process.env.REACT_APP_DIRECTUS_HOST}:${process.env.REACT_APP_DIRECTUS_PORT}/items/months/${id}`,
+            headers: {'Authorization': `Bearer ${process.env.REACT_APP_DIRECTUS_TOKEN}`},
             data: {
                 "habits": habits
             }
@@ -21,8 +19,8 @@ const CreateOnBackend = (month: string) => {
     // TODO: корректно обработать ошибку
     axios({
             method: 'post',
-            url: `http://${host}:${port}/items/months`,
-            headers: {'Authorization': `Bearer ${token}`},
+            url: `http://${process.env.REACT_APP_DIRECTUS_HOST}:${process.env.REACT_APP_DIRECTUS_PORT}/items/months`,
+            headers: {'Authorization': `Bearer ${process.env.REACT_APP_DIRECTUS_TOKEN}`},
             data: {
                 "name": month,
                 "habits": []

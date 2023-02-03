@@ -10,12 +10,12 @@ const weekDaysFebruary = ["ср", "чт", "пт", "сб", "вс", "пн", "вт"
 const weekDaysJune = ["чт", "пт", "сб", "вс", "пн", "вт", "ср", "чт", "пт", "сб", "вс", "пн", "вт", "ср", "чт", "пт", "сб", "вс", "пн", "вт", "ср", "чт", "пт", "сб", "вс", "пн", "вт", "ср", "чт", "пт"]
 
 describe('getMonthDaysArray', () => {
-    it("getWeekDaysArray(2) return weekDaysFebruary", () => {
+    it("getWeekDaysArray(1) return weekDaysFebruary", () => {
 
-        expect(getWeekDaysArray(2, 2023)).toEqual(weekDaysFebruary)
+        expect(getWeekDaysArray(1, 2023)).toEqual(weekDaysFebruary)
     })
-    it("getWeekDaysArray(6) return weekDaysJune", () => {
+    it("getWeekDaysArray(5) return weekDaysJune", () => {
 
-        expect(getWeekDaysArray(6, 2023)).toEqual(weekDaysFebruary)
+        expect(getWeekDaysArray(5, 2023)).toEqual(weekDaysJune)
     })
 })

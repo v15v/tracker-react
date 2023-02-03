@@ -10,8 +10,6 @@ import axios from "axios";
 import {CreateOnBackend, UpdateOnBackend} from "../utils/storage";
 import {IsUnicumName} from "../utils/isUnicumName";
 
-const {host, port, token} = require("../config.json")
-
 const Main = () => {
     const monthNames = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
     const monthNamesEn = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -40,8 +38,8 @@ const Main = () => {
         // TypeError: Cannot read properties of undefined (reading 'habits')
         axios({
             method: 'get',
-            url: `http://${host}:${port}/items/months?fields=id,habits&filter[name][_eq]=${monthUrl}`,
-            headers: {'Authorization': `Bearer ${token}`}
+            url: `http://${process.env.REACT_APP_DIRECTUS_HOST}:${process.env.REACT_APP_DIRECTUS_PORT}/items/months?fields=id,habits&filter[name][_eq]=${monthUrl}`,
+            headers: {'Authorization': `Bearer ${process.env.REACT_APP_DIRECTUS_TOKEN}`}
         })
             .then(({data}) => {
                 setHabits(data.data[0].habits)
